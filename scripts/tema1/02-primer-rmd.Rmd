@@ -3,8 +3,9 @@ title: "Mi primer Markdown"
 author: "Curso de Álgebra Lineal"
 date: "11/12/2018"
 output:
-  html_document:
+  html_document:help
     df_print: paged
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}

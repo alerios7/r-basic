@@ -1,7 +1,7 @@
 #Esta línea no funciona, por ahora...
 #lm(y~x)
 
-
+#Copia de ejemplo de función lm 
 require(graphics)
 
 ## Annette Dobson (1990) "An Introduction to Generalized Linear Models".

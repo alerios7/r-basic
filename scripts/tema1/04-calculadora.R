@@ -1,4 +1,6 @@
-2*(3+5/2)
+#Ejemplos de operaciones en R
+
+3*2*(3+5/2)
 
 2*((3+5)/2)
 
@@ -14,6 +16,7 @@
 
 2^(-4)
 
+#Cuántas semanas tiene 725 días
 725%/%7
 
 725%%7
@@ -37,6 +40,7 @@ Inf
 
 NA
 
+#Not a number
 NaN
 
 5/0
@@ -47,37 +51,54 @@ NaN
 
 2 ^(-15) # 3.051758e-05 = 0.00003051758
 
-c(2^30, 2^(-15), 1, 2, 3/2)
+#Véctor
+c(2^30, 2, 1, 2, 3/2) #solo el primer número en notación cientifica
 
+c(2^30, 2^-15, 1, 2, 3/2) #todos los números aparecen en notación científica 
+                         #al ejecutar
 
 sqrt(25)
 
 exp(1)
 
+#logaritmo natural
 log(pi)
 
+#logaritmo en base 2
 log(32, 2)
+
 
 log(32, base = 2)
 log(base=2, 32)
 
+#logaritmo en base 10
+log10(1000)
+
+log(4^6, 4)
+
+6^log(4,6)
+
+#valor absoluto
 abs(-pi)
 
+#Factorial
 factorial(7)
 
 factorial(4)
 
 factorial(0)
 
+#coeficiente binomial (combinatoria)
 choose(5, 3)
 
 choose(3,5)
 
-log(4^6, 4)
-
-6^log(4,6)
-
 choose(5,2)
+
+choose(0,0)
+
+choose(10, 4)
+
 
 sin(60*pi/180)
 
