@@ -99,8 +99,8 @@ choose(0,0)
 
 choose(10, 4)
 
-
-sin(60*pi/180)
+sin(60) #funciones operan en radianes
+sin(60*pi/180)  #60grados en radianes es 60*pi/180
 
 cos(60*pi/180)
 
@@ -114,33 +114,36 @@ asin(0.8660254) #arc sin en radianes
 
 asin(0.8660254) * 180 /pi #arc sin en grados
 
-asin(5) #arc sin x in [-1,1]
+asin(5) #arc sin x in [-1,1]->NaN
 
-acos(-8)
+acos(-8) #NaN
 
-print(sqrt(2),10)
+print(sqrt(2),5) #segundo número es la cantidad de digitos
 round(sqrt(2), 3)
-floor(sqrt(2))
-ceiling(sqrt(2))
-trunc(sqrt(2))
+floor(sqrt(2)) #redondeo hacia abajo
+ceiling(sqrt(2)) #redondeo hacia arriba
+trunc(sqrt(2)) 
 
-sqrt(2)^2-2
-
+sqrt(2)^2-2 #se van acumulando errores por las cifras significativas
+#R trabaja con hasta 16 cifras decimales
 round(sqrt(2), 4)^2
 
 2^50
 print(2^50, 15)
 print(2^50, 2)
+print(pi, 50) #muchos digitos
 print(pi, 22)
 #3.141592653589793115998
-#3.141592653589793238462
+#3.141592653589793238462 este es el valor exacto
 
+#round redondea a la cifra par
 round(1.25,1)
 round(1.35,1)
 round(sqrt(2),0)
 round(sqrt(2))
 
-round(digits = 5, sqrt(2))
+round(digits = 5, sqrt(2)) #se puede cambiar orden de argumentos, pero hay que 
+                           #explicitar nombre de argumento
 round(5, sqrt(2))
 
 
@@ -151,6 +154,7 @@ trunc(-3.45)
 
 x = (pi^2)/2
 x
+
 
 y <- cos(pi/4)
 y
@@ -164,6 +168,7 @@ nombre = "Juan Gabriel"
 
 HOLA = 1
 hola = 5
+h <- hola
 
 pi.4 = 4*pi
 pi.4
@@ -187,18 +192,20 @@ suma1 <- function(t){
 }
 suma1(6)
 suma1(-5)
+suma1(-3.4)
 
 product <- function(x, y){
   x*y
 }
 product(5,7)
-
+product(3, pi)
 g <- function(x,y,z) {
   exp(x^2 + y^2) * sin(z)
 }
 g(1, 2, 3)
 g(1, -1, pi)
 
+#el ; se debe usar para separar las instrucciones
 suma5 <- function(numero){
   numero = suma1(numero);
   numero = suma1(numero);
@@ -209,13 +216,16 @@ suma5 <- function(numero){
 
 suma5(3)
 
+#lista los elementos del entorno
 ls()
 
+#remover elemento
 rm(product)
+product(2, 3)
 
 ls()
 
-rm(list = ls())
+rm(list = ls()) #remueve todo
 
 class(3+2i)
 
@@ -226,18 +236,22 @@ class(3+2i)
 (3+2i)/(-1+3i)
 
 #Esto es un error:
-#2+7*i
+#2+7*i 
 
-#pi + sqrt(2)i
+#pi + sqrt(2)i se debe hacer con complex
+
 complex(real = pi, imaginary = sqrt(2)) -> z1
 z1
 
 sqrt(-5)
-sqrt(as.complex(-5))
+sqrt(as.complex(-5)) #para trabajar con raices cuadradas de negativos
 
 #La raíz cuadrada devuelve, de las dos soluciones la de
-#Re(z)>0, para obtener la otra,  hay que multiplicar por -1
+#Re(z)>0, para obtener la otra,  hay que multiplicar por -1 (los complejos 
+#tienen dos soluciones)
 sqrt(3+2i) # z^2 = 3+2i
+
+
 exp(3+2i)
 sin(3+2i)
 cos(3+2i)
@@ -262,3 +276,14 @@ z2
 Mod(z2)
 Arg(z2)
 pi/2
+z1
+z2
+ejemModulo = function(z){
+  sqrt(Re(z)^2+Im(z)^2)
+}
+Mod(z1)
+ejemModulo(z1)
+
+exp(1)
+round(atan(50),3)
+print(atan(50), 3)
