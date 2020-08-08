@@ -356,12 +356,12 @@ ax+by=c\\
 ex-fy=g
 \end{array}\right\}$$
 
-`$$|x|=\left\{\begin{array}{l}
+`$$|x|=\left\{\begin{array}{rr}
 -x & \text{si }x\le 0\\
 x & \text{si }x\ge 0
 \end{array}\right.$$`
     
-$$|x|=\left\{\begin{array}{l}
+$$|x|=\left\{\begin{array}{rr}
 -x & \text{si }x\le 0\\
 x & \text{si }x\ge 0
 \end{array}\right.$$
