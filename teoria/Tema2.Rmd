@@ -1,11 +1,13 @@
 ---
-title: Tema 2 - Documentación con R Markdown
-author: Juan Gabriel Gomila & María Santos
-output: 
+title: "Tema 2 - Documentación con R Markdown"
+author: "Juan Gabriel Gomila & María Santos"
+output:
   ioslides_presentation:
-    widescreen: true
+    widescreen: yes
     css: JB_style.css
     logo: Imgs/LogoCurso.png
+  slidy_presentation: default
+  beamer_presentation: default
 ---
 
 ```{r setup, include=FALSE}
@@ -604,7 +606,7 @@ Para introducir una parte de código dentro de un párrafo y que se ejecute al c
 
 La raíz cuadrada de 64 es `` `r "\u0060r sqrt(64)\u0060"` `` o, lo que viene siendo lo mismo, $\sqrt{64}=$`` `r "\u0060r sqrt(64)\u0060"` ``
 
-La raíz quinta de 32 es `r sqrt(64)` o, lo que viene siendo lo mismo, $\sqrt{64}=$`r sqrt(32)`
+La raíz quinta de 32 es `r 32^(1/5)` o, lo que viene siendo lo mismo, $\sqrt[5]{32}=$ `r 32^(1/5)`
 </div>
 
 

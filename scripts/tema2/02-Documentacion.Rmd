@@ -1,8 +1,9 @@
 ---
 title: "Documentación de Texto"
 author: "Curso de Estadística Descriptiva"
-date: "21/12/2018"
+date: "08/08/2020"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
 ---
@@ -45,6 +46,7 @@ elipsis: ...
 
 ecuaciones en línea $S = \pi\cdot r^2$.
 
+../ es para subir un nivel en las carpetas
 imagen ![](../../teoria/Imgs/logo.png)
 
 *** 
@@ -57,9 +59,10 @@ Aquí empezamos otra cosa
 
 * Item primero
 * Item segundo 
-    + Sub ítem 2.1
+    * Sub ítem 2.1
     + Sub ítem 2.2
     + Sub ítem 2.3
+        * sub sub
 * Item tercero
 * ...
 
