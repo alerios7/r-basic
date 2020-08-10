@@ -1,0 +1,23 @@
+---
+title: "Ejercicios véctores"
+author: "Alejandro Ríos"
+date: "8/10/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+###Ejercicios de vectores
+
+Escribir el año de nacimiento 10 veces
+```{r}
+años = rep(1988, 10)
+años
+```
+Crear véctor y modificarlo con fix()
+```{r}
+vec = c(16, 0, 1, 20, 1, 7, 88, 5, 1, 9)
+#fix(vec) no se puede ejecutar en R markdown
+```
