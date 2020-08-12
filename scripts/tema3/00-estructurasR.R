@@ -125,3 +125,177 @@ z[z == 5]
 w = c(NULL, 1, 3, NULL)
 w
 length(w)
+
+#Valores NA (not available)
+w[3] = NA
+w[6:10] = c(1, 4, 5, 8, 0)
+w
+#al aplicar funciones a véctores con valores NA, tiende a NA
+sum(w)
+cumsum(w)
+#NA remove (la mayoría de las funciones de R trae esta función)
+sum(w, na.rm = TRUE)
+#which NA no funciona
+which(w == NA)
+#para encontrar NA hay que usar la función is.na()
+is.na(w) #entrega vector con valores TRUE donde hay NA y FALSE donde no hay NA
+which(is.na(w))
+w[!is.na(w)]
+
+#cambiar los NA por el promedio de los otros valores
+w1 = w
+w1[is.na(w1)] = mean(w, na.rm = TRUE)
+w1
+
+#cumsum no tiene la opción remove NA, alternativa:
+cumsum(w[!is.na(w)])
+
+#eliminar valores NA 
+w2 = na.omit(w)
+w2
+
+#sacar los atributos que entrega na.omit
+w3 = w2
+attr(w3, "na.action") = NULL
+w3
+
+#Factores, es util para clasificar datos
+nombres = c("Alejandro", "Sofía", "Leonor", "Juan", "Leonor", "María", "Juan")
+nombres2 = factor(nombres)
+nombres2
+#ejemplo con sexo
+sexo = c("h", "m", "m", "h", "m", "m", "m", "h", "h")
+sexo.fact = factor(sexo)
+levels(sexo.fact)
+#usando función as.factor
+sexo.fact2 = as.factor(sexo)
+sexo.fact2
+
+#Agregar nuevo nivel
+sexo.fact3 = factor(sexo, levels = c("h", "m", "b"))
+sexo.fact3
+
+#agregar etiquetas
+sexo.fact4 = factor(sexo, levels = c("h", "m", "b"), labels = c("hombre", 
+                                                                "mujer", 
+                                                                "hermafrodita"))
+sexo.fact4
+levels(sexo.fact4)
+
+#cambiar nombre de levels
+notas = c(1, 4, 3, 2, 1, 3, 4, 1, 2)
+notas.fact = factor(notas)
+levels(notas.fact) = c("reprobado", "suficiente", "aprobado", "excelente")
+notas.fact
+
+#factor ordenado
+notas.fact2 = ordered(notas, labels = c("rep", "suf", "apr", "exc"))
+notas.fact2
+
+#Listas, se puede mezclar distintos tipos (parecido a diccionarios en python)
+t = c(1, 2, -1, 20, 15, -9, 8, 0, 3, 17)
+L = list(nombre = "temperaturas", datos = t, media = mean(t), sumas = cumsum(t))
+#acceder a los datos
+L$datos
+L[[2]]
+#con un solo [] devuelve una lista
+L[2]
+
+#conocer estructura de la lista
+str(L)
+
+#nombres de la lista
+names(L)
+
+#Matrices
+M = matrix(1:12, nrow = 4)
+M
+M2 = matrix(1:12, nrow = 4, byrow = TRUE)
+M2
+M[1][1]
+
+#si no se entrega un vector que sea multiplo del número de filas, R rellena
+M3 = matrix(1:13, nrow = 5)
+M3
+
+#Crear matriz a partir de un número
+M4 =  matrix(0, nrow = 3, ncol = 5)
+M4
+
+M5 = matrix(1:12, nrow = 3)
+M5
+
+#Construir matriz a partir de filas
+M6 =  rbind(1:5, c(3, 4, 5, 1, 2), 5:1)
+M6
+
+# a partir de columnas
+M7 = cbind(1:3, c(3, 2, 4), 3:1)
+M7
+# a partir de diagonal
+M8 = diag(1, 3, 3)
+M8
+M9 = diag(1:5)
+M9
+#añadir una fila (o columna)
+rbind(M5, c(1, 4, 5, 0))
+
+#acceder a elementos
+M[1, 3]
+M[2,]
+M[, 3]
+M6[2:3, c(1, 5)]
+
+#sumar columnas
+colSums(M6)
+#sumar filas
+rowSums(M6)
+#media por filas
+rowMeans(M6)
+
+#función apply a matrices
+#MARGIN = 1 aplica a filas
+#MARGIN = 2 aplica a columnas
+#MARGIN = (1, 2) aplica a filas y columnas
+apply(M6, MARGIN = 1, FUN = function(x){sqrt(sum(x^2))})
+apply(M6, MARGIN = 2, FUN = function(x){sqrt(sum(x^2))})
+apply(M6, MARGIN = c(1, 2), FUN = function(x){x^2})
+
+#Matriz transpuesta t()
+t(M6)
+
+#Multiplicación de matrices %*% (* solo, solo multiplica elemento a elemento)
+M6 %*% t(M6)
+
+#Elevar matrices, hay ue usar la función mtx.exp del paquete Biodem o %% del 
+#paquete expm (en ambos casos no calcula matriz exacta, la aproxima)
+library(Biodem)
+M7 = rbind(c(1, 3, 5), c(4, -2, -7), c(9, 4, 0))
+mtx.exp(M7, 3)
+
+A = rbind(c(2, 0, 2), c(1, 2, 3), c(0, 1, 3))
+B = rbind(c(3, 2, 1), c(1, 0, 0), c(1, 1, 1))
+A * B
+mtx.exp(A, 2)
+mtx.exp(B, 3)
+
+#Determinante de una matríz (cuadrada)
+det(A)
+
+#rango de una matriz (número de filas independientes)
+qr(A)$rank
+
+#calcular la inversa de una matriz invertible
+solve(A)
+solve(A) %*% A #matriz identidad
+
+#solve también sirve para resolver sistemas de ecuaciones (Ax = b)
+solve(A, c(1, 5, -2))
+
+#valores y vectores propios de una matríz (entrega una lista)
+eigen(A)
+
+C = rbind(c(2, 6, -8), c(0, 6, -3), c(0, 2, 1))
+P = eigen(C)$vectors
+D = diag(eigen(C)$values)
+P %*% D %*% solve(P) #descomposición canónica
