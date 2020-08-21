@@ -24,7 +24,8 @@ Como está escrito, no son equivalente, `plot(f(I))` va a graficar la función e
 ```{r}
 f = function(x){x^2-3*x+30}
 I = -15:15
-plot(f(I), main = "Una parábola")
+plot(f(I), main = "Una parábola", xlab = expression(x), 
+      ylab = expression(y=x^2-3*x+30))
 ```
 Para que sean equivalentes, habría que usar el parámetro xlim de la función plot.
 ```{r}
