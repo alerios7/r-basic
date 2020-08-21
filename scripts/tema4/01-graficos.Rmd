@@ -1,7 +1,7 @@
 ---
 title: "Graficos"
 author: "Curso de Estadística Descriptiva"
-date: "22/12/2018"
+date: "19/08/2020"
 output: html_document
 ---
 
@@ -11,32 +11,46 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Gráficos con la función `plot`
 
-```{r primer_plot, fig.cap="Gráfico básico explicando el uso del plot", fig.align='center'}
+fig.xxxx permite agregar propiedades a los gráficos.
+```{r primer_plot, fig.cap="Fig. 1: Gráfico básico explicando el uso del plot", fig.align='center'}
 x = c(2,6,4,9,-1)
 y = c(1,8,4,-2,4)
 plot(x,y)
+legend('bottom', legend = 'prueba', pch = 1)
 ```
 
 Si no incorporamos vector `y`, `R` nos va a tomar el parámetro `x` como si fuese el vector de datos `y` : `plot(1:n, x)
 
-```{r}
+```{r fig.cap="Fig. 2: Prueba de gráfico sin ingresar véctor y", fig.align='center'}
 plot(2^(1:6))
+legend("topleft", legend = expression(x^2), pch = 1)
 ```
 
-Si queremos representar una función $f(x)$:
+Si queremos representar una función $f(x)$ (si no se ingresan datos, R por defecto corre la función entre 0 y 1):
 
 ```{r}
 f <- function(x){ sqrt(x) }
 plot(f)
+legend("bottomright", legend = expression(sqrt(x)), lty = 1)
 ```
 
 ## Parámetros
 
-```{r, echo=FALSE, fig.align='center'}
+```{r prueba_param_log, fig.align='center'}
+par(mfrow = c(1, 2))
+plot = plot(exp(1:20), xlab = 'Indice', ylab = expression(e^{1:20}),
+            main = "Escala lineal")
+plotLog = plot(exp(1:20), log = "y", xlab = 'Indice', ylab = expression(e^{1:20}),
+            main = "Escala logarítmica")
+par(mfrow = c(1, 1))
+```
+
+
+```{r ejem_fibonacci, echo=FALSE, fig.align='center'}
 n = 1:20
 fib = (1/sqrt(5))*((1+sqrt(5))/2)^n - (1/sqrt(5))*((1-sqrt(5))/2)^n
-fib
-par(mfrow = c(1,2))
+par(mfrow = c(1,2)) #mfrow es para distribuir gráficos, en este caso 1 fila y 2 columnas
+#bg es para el color interior del point character (cuando permite cambiar color)
 plot(fib, xlab = "n", ylab = expression(F[n]),
      main = "Sucesión de Fibonacci", pch = 21, cex = 2,
      col = "powderblue", bg = "orchid", log = "xy")
@@ -44,9 +58,22 @@ plot(fib, xlab = "n", ylab = expression(F[n]),
 plot(fib, xlab = "n", ylab = expression(F[n]),
      main = "Sucesión de Fibonacci", pch = 21, cex = 2,
      col = "powderblue", bg = "orchid", log = "y")
+#se vuelve a definir al final el parámetro, para dejarlo en la forma estándar
 par(mfrow = c(1,1))
 ```
 
+```{r, eval=TRUE}
+par(mfrow = c(3,2))
+x = c(50:59)
+y = c(2,9,25,3,100,77,62,54,19,40)
+plot(x,y, pch = 23, cex = 2, col = "blue", type = "p")
+plot(x,y, pch = 23, cex = 2, col = "blueviolet", type = "l")
+plot(x,y, pch = 23, cex = 2, col = "gold", type = "b")
+plot(x,y, pch = 23, cex = 2, col = "deeppink", type = "o")
+plot(x,y, pch = 23, cex = 2, col = "springgreen", type = "h")
+plot(x,y, pch = 23, cex = 2, col = "firebrick1", type = "s")
+par(mfrow = c(1,1))
+```
 
 ```{r}
 plot(n, fib, pch = 21, col = "red", bg = "yellow", cex = 1.2, 
@@ -63,7 +90,7 @@ f <- function(x){
 }
 plot(f, xlim = c(-3,3))
 points(0,0, pch = 19)
-points(-3:3, (-3:3)^2, col = "blue")
+points(-3:3, (-3:3)^2, col = "blue") 
 abline(2,3, lty = "dashed", col = "red")
 abline(v = 2, lty = "dotted", col = "green")
 abline(h = 5, lty = "dotdash", col = "gray")
@@ -104,5 +131,15 @@ legend("bottomright",
        col = c("red", "blue", "orangered"), 
        lty = c("dotted", "dashed", "dashed")
        )
+```
+```{r simbolos}
+x = c(5*(1:10))
+plot(x, c(exp(-x)+(-1)^x*x/2*sin(x)^2), xlab = "", ylab = "",
+     main = "Gráfico con varios elementos")
+segments(10, 0, 40, 0, col = "red", lwd = 4)
+arrows(10, 0, 40, -10, col = "blue", length = 0.5, angle = 30, code = 2)
+symbols(40, 0, stars = cbind(1, .5, 1, .5, 1, .5, 1, .5, 1, .5), add = TRUE, lwd = 3, inches = 0.5)
+symbols(40, 0, stars = cbind(1, .5, 1, .5, 1, .5, 1, .5, 1, .5), add = TRUE)
+polygon(c(20, 30, 40), c(10, -10, 10), col = "gold", density = 3, angle = 90, lty = 4, lwd = 5)
 ```
 
