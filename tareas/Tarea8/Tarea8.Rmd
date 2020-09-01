@@ -1,0 +1,66 @@
+---
+title: "Tarea 8"
+author: "Alejandro Ríos"
+date: "9/1/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Tarea 8
+
+Carga en R o en Python el CSV de la web [http://winterolympicsmedals.com/medals.csv](http://winterolympicsmedals.com/medals.csv) y responde a las preguntas de la tarea.
+
+Cargamos el dataframe
+```{r carga_csv}
+df = read.csv('../../data/medals.csv')
+str(df)
+head(df)
+```
+
+### Preguntas
+
+1. ¿Cuantos deportistas aparecen en el data frame?
+```{r echo=FALSE}
+print(nrow(df))
+```
+
+2. ¿Cuantos han ganado medallas de oro, cuantos de plata y cuantos de bronce?
+```{r echo=FALSE}
+#Agrego columna para contar facilmente
+df$Count = 1
+
+#Agregamos por medalla la columna count
+aggregate(Count ~ Medal, df, sum)
+```
+
+3. ¿En cuantos lugares se han hecho olimpiadas de invierno?
+```{r echo=FALSE}
+length(levels(df$City))
+```
+
+4. ¿Cuantos hombres y cuantas mujeres hay?
+```{r echo=FALSE}
+aggregate(Count~Event.gender, df[df$Event.gender == "M" | df$Event.gender == "W", ], sum)
+```
+
+5. ¿En qué año participaron más deportistas?
+```{r echo=FALSE}
+df$Year = as.factor(df$Year)
+df2 = aggregate(Count~Year, df, sum)
+df2$Year = as.integer(as.character(df2$Year))
+print(df2[df2$Count == max(df2$Count), ]$Year)
+```
+
+
+6. El campo NOC indica el país del ganador de la medalla. ¿Qué país puede presumir de haber ganado más medallas de oro en los juegos de invierno entre 1960 y 1996?
+```{r echo=FALSE}
+#Volvemos el año a número
+df$Year = as.integer(as.character(df$Year))
+df3 = aggregate(Count~NOC, df[df$Year >= 1960 & df$Year <= 1996 & df$Medal == "Gold", ], sum)
+df3$NOC = as.character(df3$NOC)
+print(df3[df3$Count == max(df3$Count), ])
+```
+

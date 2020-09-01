@@ -8,18 +8,20 @@ output:
 
 # Data frame de Iris
 
+Recomendación: Hacer una copia del dataframe y guardarlo en la variable df
 ```{r}
 df = iris
 head(df, 5)
 tail(df, 5)
 
-str(df)
-names(df) #colnames
-rownames(df)
-dimnames(df)
+str(df) #ver tipo de datos
+names(df) #y colnames son equivalentes
+rownames(df) #nombre de filas
+dimnames(df) #nombre de filas y columnas
 
-dim(df)
+dim(df) #numero de filas y columnas del dataframe
 
+#acceder a variable Petal.Length
 df$Petal.Length[1:10]
 df$Species[1:10]
 ```
