@@ -7,12 +7,22 @@ output: html_document
 
 # Tablas de contingencia
 
+La función table calcula las frecuencias absolutas
 ```{r}
 datos = factor(c("H", "M", "M", "M", "H", "H", "M", "M"))
 table(datos)
 table(datos)["M"]
+
+#Cantidad de observaciones
 sum(table(datos))
 ```
+
+Otro ejemplo
+```{r}
+datos2 = factor(sample(c("si", "no"), 10, replace = TRUE))
+table(datos2)
+```
+
 
 # Frecuencias relativas
 
@@ -24,6 +34,7 @@ prop.table(table(datos))
 table(datos)/length(datos)
 names(which(table(datos)==3))
 
+#Función para calcular la moda
 moda <- function(d){
   names(which(table(d)==max(table(d))))
 }
@@ -33,12 +44,43 @@ m_t = moda(datos)
 
 La moda del data frame es: `r m_t`.
 
+Ejercicio: Para una muestra de datos con 6 hombres y 14 mujeres, calcular la tabla de frecuencias absolutas, de frecuencias relativas y la moda.
+```{r}
+datos3 = factor(c(rep("H", 4), rep("M", 14)))
+
+#table de frecuencias absolutas
+table(datos3)
+
+#Tabla de frecuencias relativas
+prop.table(table(datos3))
+
+#Moda
+names(which(table(datos3) == max(table(datos3))))
+```
+
+#Ejemplo tabla bidimensional
+```{r}
+resp = factor(sample(c("si", "no"), 15, replace = TRUE))
+sexo = sample(c("h", "m"), 15, replace = TRUE)
+table(resp, sexo)
+table(sexo, resp)
+t(table(resp, sexo)) #Transpuesta
+
+#Frecuencias relativas globales
+prop.table(table(sexo, resp))
+
+#Frecuencias relativas marginales
+prop.table(table(sexo, resp), margin = 1) #por fila
+prop.table(table(sexo, resp), margin = 2) #por columna
+```
+
+
 # Paquete `gmodels`
 ```{r}
 library(gmodels)
 sex = factor(c("H", "M", "M", "M", "H", "H", "M", "M"))
 ans = factor(c("S", "N", "S", "S", "S", "N", "N", "S"))
-CrossTable(sex, ans, prop.chisq = FALSE)
+CrossTable(sex, ans, prop.chisq = FALSE, format = "SPSS")
 ```
 
 # Sumas por filas y columnas

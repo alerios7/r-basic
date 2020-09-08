@@ -19,7 +19,9 @@ data
 
 ## Manipulación de datos
 
+Cambio de nombres de variables
 ```{r}
+dimnames(data)
 dimnames(data) = list(
   Pelo = c("Negro", "Marron", "Pelirrojo", "Rubio"),
   Ojos = c("Marrones", "Azules", "Pardos", "Verdes")
@@ -49,6 +51,8 @@ barplot(prop.table(colSums(data)), ylim = c(0, 0.4),
         main = "Frecuencias relativas del color de ojos",
         col = c("burlywood4", "lightblue", "orange3", "lightgreen")
         )
+
+barplot(prop.table(rowSums(data)), ylim = c(0, 0.5), main = "Frecuencias relativas color de pelo", col = c("black", "brown", "red", "yellow"))
 ```
 
 ## Frecuencias relativas globales y marginales

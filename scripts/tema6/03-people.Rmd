@@ -3,8 +3,8 @@ title: "03-people"
 author: "Curso de Estadística Descriptiva"
 date: "24/12/2018"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 # Ejemplo de color de ojos y de pelo
@@ -23,19 +23,22 @@ prop.table(HairEyeColor, margin = c(1,2))
 ```
 
 ```{r}
+#cambiar orden de columnas (array permutation)
 aperm(HairEyeColor, perm = c("Sex", "Hair", "Eye"))
 ```
 
 ```{r}
+#Cambiar formato de tablas
 library(kableExtra)
 kable(HairEyeColor)
 ```
 
 ```{r, results='asis'}
+#Formato de tabla en latex (solo para 2 dimensiones)
 library(xtable)
 sex = factor(c("H", "M", "M", "M", "H", "H", "M", "M"))
 ans = factor(c("S", "N", "S", "S", "S", "N", "N", "S"))
 
-xtable(table(sex, ans))
+xtable(table(sex, ans)) #solo aparece en pdf
 ```
 
