@@ -1,0 +1,90 @@
+---
+title: "Tarea 10"
+author: "Alejandro Ríos"
+date: "9/8/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Tarea 10
+
+Cargamos el paquete `MASS`. Para la tarea se usara la tabla de datos `birthwt`.
+```{r}
+library(MASS)
+```
+
+### Preguntas
+
+1. Utiliza str() y head() para explorar la estructura, y con help(), mirar el significado de cada variable.
+```{r}
+str(birthwt)
+head(birthwt)
+help(birthwt)
+```
+
+2. Calcula una tabla de frecuencias relativas marginales de los pares (raza de la madre, peso inferior a 2.5 kg o no) que permita ver si la raza de la madre influye en el peso del bebé.
+```{r}
+prop.table(table(birthwt$race, birthwt$low), margin = 1)
+```
+
+3. Dibuja un diagrama de mosaico de la tabla del ejercicio anterior.
+```{r}
+plot(prop.table(table(birthwt$race, birthwt$low), margin = 1), main = "Frecuencia relativa raza-peso < 2.5", col = c("white", "black"))
+```
+
+4. Dibuja un diagrama bidimensional de barras, con las barras organizadas en bloques, que permita visualizar la información de los ejercicios anteriores. Aprovecha para poner nombres adecuados a los bloques, colores a las barras, y añadir una leyenda que explique qué representa cada barra.
+
+```{r}
+barplot(prop.table(table(birthwt$race, birthwt$low), margin = 1), beside = TRUE, legend.text = c("Blanca", "Negra", "Otra"), col = c("white", "black", "yellow"), ylim = c(0, 0.8), names.arg = c(">=2.5 kg", "<2.5 kg"))
+```
+
+5. ¿Se puede obtener alguna conclusión de la tabla y el diagrama de barras anterior? Argumenta tu respuesta.
+
+De los gráficos y tablas, se observa que hay una mayor tendencia a tener hijos que pesen menos 2.5 kg en madres de raza negra (42%) y de otra razas (37%).
+
+6. Repite los cuatro ejercicios anteriores para los pares (madre fumadora o no, peso inferior a 2.5 kg o no) y para los pares (madre hipertensa o no, peso inferior a 2.5 kg o no.
+
+Repetimos primero para par madre fumadora (si, no)-peso inferior a 2.5 kg (si, no).
+```{r}
+#Tabla de frecuencias relativas
+prop.table(table(birthwt$smoke, birthwt$low), margin = 1)
+
+#Gráfico de mosaico.
+plot(prop.table(table(birthwt$smoke, birthwt$low), margin = 1), main = "Frecuencia relativa peso-fuma", col=c("white", "black"))
+
+#Gráfico de barras
+barplot(prop.table(table(birthwt$smoke, birthwt$low), margin = 1), beside = TRUE, legend.text = c("no fuma", "si fuma"), col = c("white", "black"), ylim = c(0, 0.8), names.arg = c(">=2.5 kg", "<2.5 kg"))
+
+```
+
+Se observa que hay una mayor probabilidad de que el hijo pese menos de 2.5 kg en madres fumadoras (40,5% de las madres que fumaron tuvieron hijos con peso menor a 2,5 kg mientras que solo el 25,2% de las que no fumaron).
+
+Repetimos el ejercicio para madre hipertensa (si, no)-peso inferior 2.5 kg (si, no)
+```{r}
+#Tabla de frecuencias relativas
+prop.table(table(birthwt$ht, birthwt$low), margin = 1)
+
+#Gráfico de mosaico.
+plot(prop.table(table(birthwt$ht, birthwt$low), margin = 1), main = "Frecuencia relativa peso-hipertensión", col=c("white", "black"))
+
+#Gráfico de barras
+barplot(prop.table(table(birthwt$ht, birthwt$low), margin = 1), beside = TRUE, legend.text = c("Sin historial de hipertensión", "Con historial de hipertensión"), col = c("white", "black"), ylim = c(0, 0.8), names.arg = c(">=2.5 kg", "<2.5 kg"))
+```
+
+Se observa que para madres con historial de hipertensión, hay mayor probabilidad de que el hijo pese menos de 2,5 kg al nacer (58%).
+
+7. Calcula una tabla de frecuencias relativas marginales de las ternas (raza de la madre, madre fumadora o no, peso inferior a 2.5 kg o no) que permita ver si la raza de la madre y su condición de fumadora o no fumadora influyen en el peso del bebé.
+```{r}
+prop.table(ftable(birthwt$race, birthwt$smoke, birthwt$low, col.vars = 3), margin = 1)
+```
+
+Se observa que para las madres fumadoras de las 3 razas, la probabilidad de que el hijo pese menos de 2,5 kg es mayor que si no fuman, y en el caso de madres de raza negra es mas probable que el hijo pese menos de 2,5 kg si fuma (60%).
+
+8. Dibuja un diagrama de mosaico de la tabla del ejercicio anterior.
+```{r}
+plot(prop.table(table(birthwt$race, birthwt$smoke, birthwt$low), margin = 1))
+```
+
