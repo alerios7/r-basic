@@ -1,0 +1,46 @@
+---
+title: "Tarea 11"
+author: "Alejandro Ríos"
+date: "9/11/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Tarea 11
+
+### Preguntas
+
+1. Dad la instrucción que defina la tabla de frecuencias absolutas de un vector llamado "alumnos".
+
+table(alumnos)
+
+2. Con una sola instrucción, definid la tabla de frecuencias relativas de un vector llamado "edades".
+
+prop.table(table(edades))
+
+3. Con una sola instrucción, definid la tabla bidimensional conjunta de frecuencias absolutas de dos vectores llamados "altura" y "peso", de forma que las filas correspondan a "altura" y las columnas a "peso"
+
+table(altura, peso)
+
+4. Con una sola instrucción, definid la tabla bidimensional conjunta de frecuencias relativas calculadas dentro del total, de dos vectores llamados "edad" y "altura", de forma que las filas correspondan a "altura" y las columnas a "edad"
+
+prop.table(table(altura, peso))
+
+5. Con una sola instrucción, dibujad un diagrama de barras básico de un vector llamado "edad"
+
+barplot(table(edad))
+
+6. Con una sola instrucción, dibujad un diagrama circular básico de un vector llamado "alumnos"
+
+pie(table(alumnos))
+
+7. La tabla "DNase" es uno de los data frames que tiene predefinidos R. Dad la instrucción que dibuje un diagrama de barras básico de la variable "density" de este mismo data frame.
+
+```{r}
+barplot(table(DNase$density))
+```
+
+
